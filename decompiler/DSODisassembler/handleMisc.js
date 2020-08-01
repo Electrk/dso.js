@@ -5,12 +5,8 @@ import assert from '~/util/assert.js';
 
 import { DSODisassemblerError } from '~/decompiler/errors.js';
 
-import { enums } from '~/common/opcodes.js';
 
-const { OP_ADVANCE_STR_APPENDCHAR } = enums;
-
-
-const handleTriplePrefix = function ( op, subtype, ip )
+const handleTriplePrefix = function ( opname, subtype, ip )
 {
 	const values = [];
 
@@ -27,10 +23,10 @@ const handleTriplePrefix = function ( op, subtype, ip )
 		throw new DSODisassemblerError (`Unhandled OpcodeTriplePrefix at ${ip}`);
 	}
 
-	return new DSOOpValueToken (op, values);
+	return new DSOOpValueToken (opname, values);
 };
 
-const handleJumpIfNot = function ( op, subtype, ip )
+const handleJumpIfNot = function ( opname, subtype, ip )
 {
 	assert (this.currBlock.hasBlock (ip), `Missing control block at ${ip}`);
 
@@ -44,16 +40,16 @@ const handleJumpIfNot = function ( op, subtype, ip )
 	return new DSOValueToken (subtype, [ip, endIP]);
 };
 
-const handleStringStart = function ( op, subtype, ip )
+const handleStringStart = function ( opname, subtype, ip )
 {
 	let appendChar = null;
 
-	if ( op === OP_ADVANCE_STR_APPENDCHAR )
+	if ( opname === 'OP_ADVANCE_STR_APPENDCHAR' )
 	{
 		appendChar = this.advance ();
 	}
 
-	return new DSOOpValueToken (op, appendChar);
+	return new DSOOpValueToken (opname, appendChar);
 };
 
 

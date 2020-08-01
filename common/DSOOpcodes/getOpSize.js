@@ -9,7 +9,7 @@ import { getOpcodeType } from '~/common/opcodes/getOpcodeType.js';
  */
 const getOpSize = function ( code, ip )
 {
-	const op   = this.opnames[code[ip]];
+	const op   = this.getOpname (code[ip]);
 	const type = getOpcodeType (op);
 
 	switch ( type )

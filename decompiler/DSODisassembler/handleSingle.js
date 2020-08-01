@@ -3,7 +3,7 @@ import DSOOpValueToken from '~/DSOToken/DSOOpValueToken.js';
 import DSOReturnToken  from '~/DSOToken/DSOReturnToken.js';
 
 
-const handleSingle = function ( op, subtype )
+const handleSingle = function ( opname, subtype )
 {
 	switch ( subtype )
 	{
@@ -33,12 +33,12 @@ const handleSingle = function ( op, subtype )
 
 		default:
 		{
-			return new DSOOpcodeToken (op);
+			return new DSOOpcodeToken (opname);
 		}
 	}
 };
 
-const handleSinglePrefix = function ( op, subtype, ip )
+const handleSinglePrefix = function ( opname, subtype, ip )
 {
 	if ( subtype === 'OpcodeLoopJump' )
 	{
@@ -50,7 +50,7 @@ const handleSinglePrefix = function ( op, subtype, ip )
 
 	if ( subtype === 'OpcodeLoadImmed' )
 	{
-		value = this.advanceConstant (op);
+		value = this.advanceConstant (opname);
 	}
 	else if ( subtype === 'OpcodeSetCurVar' || subtype === 'OpcodeSetCurField' )
 	{
@@ -78,7 +78,7 @@ const handleSinglePrefix = function ( op, subtype, ip )
 		value = !!value;
 	}
 
-	return new DSOOpValueToken (op, value);
+	return new DSOOpValueToken (opname, value);
 };
 
 

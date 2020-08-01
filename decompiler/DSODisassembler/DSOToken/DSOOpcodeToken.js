@@ -1,14 +1,14 @@
 import DSOToken from '~/DSOToken/DSOToken.js';
 
-import { getOpcodeSubtype } from '~/decompiler/opcodes/getOpcodeType.js';
+import { getOpcodeSubtype } from '~/common/opcodes/getOpcodeType.js';
 
 
 class DSOOpcodeToken extends DSOToken
 {
-	constructor ( op )
+	constructor ( opname )
 	{
-		super (getOpcodeSubtype (op));
-		this.op = op;
+		super (getOpcodeSubtype (opname));
+		this.op = opname;
 	}
 }
 

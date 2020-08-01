@@ -1,15 +1,17 @@
 import { DSODisassemblerError } from '~/decompiler/errors.js';
 
-import { getOpcodeType, getOpcodeSubtype } from '~/decompiler/opcodes/getOpcodeType.js';
+import { getOpcodeType, getOpcodeSubtype } from '~/common/opcodes/getOpcodeType.js';
 
 
 const scanNext = function ()
 {
 	const { ip } = this;
 
-	const op      = this.advance ();
-	const type    = getOpcodeType (op);
-	const subtype = getOpcodeSubtype (op);
+	const opcode  = this.advance ();
+	const opname  = this.opcodes.getOpname (opcode);
+
+	const type    = getOpcodeType (opname);
+	const subtype = getOpcodeSubtype (opname);
 
 	this.handleMarkers (ip);
 
@@ -18,27 +20,27 @@ const scanNext = function ()
 		case 'OpcodeSingle':
 		case 'OpcodeStringEnd':
 		{
-			return this.handleSingle (op, subtype);
+			return this.handleSingle (opname, subtype);
 		}
 
 		case 'OpcodeSinglePrefix':
 		{
-			return this.handleSinglePrefix (op, subtype, ip);
+			return this.handleSinglePrefix (opname, subtype, ip);
 		}
 
 		case 'OpcodeTriplePrefix':
 		{
-			return this.handleTriplePrefix (op, subtype, ip);
+			return this.handleTriplePrefix (opname, subtype, ip);
 		}
 
 		case 'OpcodeJumpIfNot':
 		{
-			return this.handleJumpIfNot (op, subtype, ip);
+			return this.handleJumpIfNot (opname, subtype, ip);
 		}
 
 		case 'OpcodeStringStart':
 		{
-			return this.handleStringStart (op, subtype, ip);
+			return this.handleStringStart (opname, subtype, ip);
 		}
 
 		case 'OpcodeFuncDecl':
@@ -48,17 +50,17 @@ const scanNext = function ()
 
 		case 'OpcodeError':
 		{
-			throw new DSODisassemblerError (`Invalid opcode ${op} at ${ip}`);
+			throw new DSODisassemblerError (`Invalid opcode ${opcode} at ${ip}`);
 		}
 
 		case null:
 		{
-			throw new DSODisassemblerError (`Non-existent opcode ${op} at ${ip}`);
+			throw new DSODisassemblerError (`Non-existent opcode ${opcode} at ${ip}`);
 		}
 
 		default:
 		{
-			throw new DSODisassemblerError (`Unhandled opcode ${op} at ${ip}`);
+			throw new DSODisassemblerError (`Unhandled opcode ${opcode} at ${ip}`);
 		}
 	}
 };

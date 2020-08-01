@@ -11,7 +11,7 @@ import * as analyzeJumps from '~/DSOControlBlock/analyzeJumps.js';
  * For sorting out various code ambiguities (e.g. loops vs. conditionals, what OP_JMPs are, etc.)
  *
  * @usage Create a DSOControlBlock instance with 0 and code.length as the arguments, then call
- *        .scan(code) and .analyzeJumps()
+ *        .scan(loader) and .analyzeJumps()
  */
 class DSOControlBlock
 {

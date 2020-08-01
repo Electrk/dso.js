@@ -3,7 +3,7 @@ import DSOControlBlock from '~/DSOControlBlock/DSOControlBlock.js';
 
 import { has } from '~/util/has.js';
 
-import { getOpcodeSubtype } from '~/decompiler/opcodes/getOpcodeType.js';
+import { getOpcodeSubtype } from '~/common/opcodes/getOpcodeType.js';
 
 import * as scanNext       from '~/DSODisassembler/scanNext.js';
 import * as handleSingle   from '~/DSODisassembler/handleSingle.js';
@@ -67,7 +67,7 @@ class DSODisassembler
 
 	peek ()
 	{
-		return this.code[this.ip];
+		return this.opcodes.getOpname (this.code[this.ip]);
 	}
 
 	advance ()
@@ -133,6 +133,11 @@ class DSODisassembler
 	get code ()
 	{
 		return this.loader.code;
+	}
+
+	get opcodes ()
+	{
+		return this.loader.opcodes;
 	}
 
 	get identTable ()
