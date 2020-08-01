@@ -1,5 +1,6 @@
 import DSOOpcodeSet from '~/DSOOpcodeSet/DSOOpcodeSet.js';
 
+import * as blv20 from '~/DSOOpcodeSet/opcodes/blockland-v20.js';
 import * as blv21 from '~/DSOOpcodeSet/opcodes/blockland-v21.js';
 
 
@@ -14,6 +15,14 @@ const createOpcodeSet = setName =>
 
 	switch ( setName )
 	{
+		case 'blockland-v20':
+		{
+			opcodes = blv20.opcodes;
+			version = blv20.version;
+
+			break;
+		}
+
 		case 'blockland-v21':
 		{
 			opcodes = blv21.opcodes;
