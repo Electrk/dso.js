@@ -1,3 +1,6 @@
+import { getOpcodeType } from '~/common/opcodes/getOpcodeType.js';
+
+
 /**
  * @param {integer[]} code
  * @param {integer}   ip
@@ -6,9 +9,8 @@
  */
 const getOpSize = function ( code, ip )
 {
-	const op      = code[ip];
-	const type    = this.getOpcodeType (op);
-	const subtype = this.getOpcodeSubtype (op);
+	const op   = this.opnames[code[ip]];
+	const type = getOpcodeType (op);
 
 	switch ( type )
 	{
@@ -27,7 +29,7 @@ const getOpSize = function ( code, ip )
 		case 'OpcodeStringStart':
 		case 'OpcodeStringEnd':
 		{
-			if ( op === this.opcodes.OP_ADVANCE_STR_APPENDCHAR )
+			if ( op === 'OP_ADVANCE_STR_APPENDCHAR' )
 			{
 				return 2;
 			}

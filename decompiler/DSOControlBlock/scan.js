@@ -1,17 +1,17 @@
-import assert    from '~/util/assert.js';
-import getOpSize from '~/decompiler/opcodes/getOpSize.js';
+import assert from '~/util/assert.js';
 
-import { getOpcodeSubtype } from '~/decompiler/opcodes/getOpcodeType.js';
+import { getOpcodeSubtype } from '~/common/opcodes/getOpcodeType.js';
 
 
 /**
  * Initial scan to add jump sources and determine the control block's type.
  *
- * @param {integer[]} code
+ * @param {DSOLoader} loader
  */
-const scan = function ( code )
+const scan = function ( loader )
 {
-	const { end } = this;
+	const { end }           = this;
+	const { code, opcodes } = loader;
 
 	let ip = this.start;
 
@@ -53,7 +53,7 @@ const scan = function ( code )
 				this.type = 'loop';
 			}
 
-			const size = getOpSize (code, ip);
+			const size = opcodes.getOpSize (code, ip);
 
 			assert (size > 0, `Invalid opcode ${op} at ${ip}`);
 

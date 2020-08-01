@@ -1,14 +1,14 @@
 import { has } from '~/util/has.js';
 
-import opcodeTypes    from '~/DSOOpcodes/types.js';
-import opcodeSubtypes from '~/DSOOpcodes/subtypes.js';
+import opcodeTypes    from '~/common/opcodes/types.js';
+import opcodeSubtypes from '~/common/opcodes/subtypes.js';
 
 
 /**
  * @param   {string|integer} op
  * @returns {string|null} null if not found
  */
-const getOpcodeType = function ( op )
+const getOpcodeType = op =>
 {
 	if ( typeof op === 'number' )
 	{
@@ -27,7 +27,7 @@ const getOpcodeType = function ( op )
  * @param   {string|integer} op
  * @returns {string|null} null if not found
  */
-const getOpcodeSubtype = function ( op )
+const getOpcodeSubtype = op =>
 {
 	if ( typeof op === 'number' )
 	{

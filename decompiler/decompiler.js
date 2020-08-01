@@ -36,7 +36,7 @@ const decompileDSO = ( buffer, options = {} ) =>
 
 	const controlBlock = new DSOControlBlock (0, loader.code.length);
 
-	controlBlock.scan (loader.code);
+	controlBlock.scan (loader);
 	controlBlock.analyzeJumps ();
 
 	const disassembler = new DSODisassembler (loader, controlBlock);
