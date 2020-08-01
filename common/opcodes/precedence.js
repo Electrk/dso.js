@@ -40,4 +40,4 @@ const getOpPrecedence = op =>
 };
 
 
-export default getOpPrecedence;
+export { getOpPrecedence };

@@ -22,4 +22,4 @@ const isOpAssociative = op =>
 };
 
 
-export default isOpAssociative;
+export { isOpAssociative };
