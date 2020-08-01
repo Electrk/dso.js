@@ -1,9 +1,12 @@
+import { has } from '~/util/has.js';
+
+
 const opToStr =
 {
 	'OP_NOT':            '!',
 	'OP_NOTF':           '!',
-	'OP_ONESCOMPLEMENT': '~',
 	'OP_NEG':            '<NEG>',  // To prevent conflicts with OP_SUB
+	'OP_ONESCOMPLEMENT': '~',
 
 	'OP_ADD': '+',
 	'OP_SUB': '-',
@@ -34,23 +37,13 @@ const opToStr =
 
 
 /**
- * @param   {string|integer} op
- * @returns {string|null} null if not a valid opcode.
+ * @param   {string} op
+ * @returns {string|null} null if invalid opname.
  */
-const operatorToStr = function ( op )
+const operatorToStr = op =>
 {
-	if ( typeof op === 'number' )
-	{
-		op = this.opnames[op];
-	}
-
-	if ( !this.isOpcode (op) )
-	{
-		return null;
-	}
-
-	return opToStr[op];
+	return has (opToStr, op) ? opToStr[op] : null;
 };
 
 
-export { operatorToStr };
+export default operatorToStr;

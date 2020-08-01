@@ -1,5 +1,5 @@
 import assert        from '~/util/assert.js';
-import operatorToStr from '~/decompiler/opcodes/operatorToStr.js';
+import operatorToStr from '~/common/opcodes/operatorToStr.js';
 
 import { pushIfTrue } from '~/util/arrays.js';
 

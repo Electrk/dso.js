@@ -2,8 +2,7 @@ import { has } from '~/util/has.js';
 
 import enumerate from '~/util/enumerate.js';
 
-import * as getOpSize     from '~/DSOOpcodes/getOpSize.js';
-import * as operatorToStr from '~/DSOOpcodes/operatorToStr.js';
+import * as getOpSize from '~/DSOOpcodes/getOpSize.js';
 
 
 class DSOOpcodes
@@ -56,7 +55,7 @@ class DSOOpcodes
 	}
 }
 
-Object.assign (DSOOpcodes.prototype, { ...getOpSize, ...operatorToStr });
+Object.assign (DSOOpcodes.prototype, { ...getOpSize });
 
 
 export default DSOOpcodes;
