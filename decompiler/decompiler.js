@@ -16,6 +16,8 @@ import
 }
 from '~/decompiler/errors.js';
 
+import * as blv21 from '~/DSOLoader/readFuncs/blockland-v21.js';
+
 
 /**
  * Decompiles a DSO file from a buffer.
@@ -23,16 +25,25 @@ from '~/decompiler/errors.js';
  * For browsers, use the `buffer` npm package.
  * For Node.js, use the native Buffer class.
  *
- * @param {Buffer} buffer
- * @param {Object} [options={}]
+ * @param {Buffer}   buffer
+ * @param {Object}   [options={}]
+ * @param {string}   [options.opcodeSet]   - Game-specific opcodes.
+ * @param {Function} [options.readFunc]    - @see {DSOLoader}
+ * @param {boolean}  [options.outputArray] - Whether to output a code string or code array.
  *
  * @returns {string|Array} Either a code string or code array, depending on the options set.
  */
 const decompileDSO = ( buffer, options = {} ) =>
 {
-	const { opcodeSetName = 'blockland-v21', outputArray = false } = options;
+	const
+	{
+		opcodeSet   = 'blockland-v21',
+		readFunc    = blv21.readFunc,
+		outputArray = false,
+	}
+	= options;
 
-	const loader = new DSOLoader (buffer, createOpcodeSet (opcodeSetName));
+	const loader = new DSOLoader (buffer, createOpcodeSet (opcodeSet), readFunc);
 
 	loader.read ();
 

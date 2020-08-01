@@ -6,8 +6,6 @@ import * as getTableValue from '~/DSOLoader/getTableValue.js';
 import * as readNumber    from '~/DSOLoader/readNumber.js';
 import * as readString    from '~/DSOLoader/readString.js';
 
-import * as blv21 from '~/DSOLoader/readFuncs/blockland-v21.js';
-
 
 /**
  * Reads raw DSO file buffer and unencrypts string tables -- does not parse opcodes.
@@ -17,11 +15,11 @@ import * as blv21 from '~/DSOLoader/readFuncs/blockland-v21.js';
 class DSOLoader
 {
 	/**
-	 * @param {Buffer}       buffer           - File buffer for open DSO file.
-	 * @param {DSOOpcodeSet} opcodeSet        - Opcode set we're using.
-	 * @param {Function}     [readFunc=blv21] - Version-specific function for reading DSOs.
+	 * @param {Buffer}       buffer    - File buffer for open DSO file.
+	 * @param {DSOOpcodeSet} opcodeSet - Opcode set we're using.
+	 * @param {Function}     readFunc  - Game-specific function for reading DSOs.
 	 */
-	constructor ( buffer = null, opcodeSet = null, readFunc = blv21 )
+	constructor ( buffer = null, opcodeSet = null, readFunc = null )
 	{
 		if ( buffer === null )
 		{
@@ -31,6 +29,11 @@ class DSOLoader
 		if ( opcodeSet === null )
 		{
 			throw new DSOLoaderError ('Missing required argument: `opcodeSet`');
+		}
+
+		if ( readFunc === null )
+		{
+			throw new DSOLoaderError ('Missing required argument: `readFunc`');
 		}
 
 		this.buffer    = buffer;
