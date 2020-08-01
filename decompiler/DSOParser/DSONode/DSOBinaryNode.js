@@ -2,8 +2,8 @@ import assert from '~/util/assert.js';
 
 import { DSOExprNode } from '~/DSONode/DSONode.js';
 
-import { getOpPrecedence } from '~/common/opcodes/precedence.js';
-import { isOpAssociative } from '~/common/opcodes/associativity.js';
+import { getOpPrecedence } from '~/common/ops/precedence.js';
+import { isOpAssociative } from '~/common/ops/associativity.js';
 
 
 class DSOBinaryNode extends DSOExprNode

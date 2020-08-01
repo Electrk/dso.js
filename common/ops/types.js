@@ -1,4 +1,4 @@
-const opcodeTypes =
+const opTypes =
 {
 	OP_STR_TO_UINT:   'OpcodeSingle',
 	OP_STR_TO_FLT:    'OpcodeSingle',
@@ -118,4 +118,4 @@ const opcodeTypes =
 };
 
 
-export default opcodeTypes;
+export default opTypes;

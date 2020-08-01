@@ -1,6 +1,6 @@
 import assert from '~/util/assert.js';
 
-import { getOpcodeSubtype } from '~/common/opcodes/getOpcodeType.js';
+import { getOpSubtype } from '~/common/ops/getOpType.js';
 
 
 /**
@@ -29,7 +29,7 @@ const scan = function ( loader )
 	while ( ip < end )
 	{
 		const op      = code[ip];
-		const subtype = getOpcodeSubtype (opcodeSet.getOpname (op));
+		const subtype = getOpSubtype (opcodeSet.getOpname (op));
 
 		if ( subtype === 'OpcodeJumpIfNot' )
 		{

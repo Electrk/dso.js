@@ -2,7 +2,7 @@ import DSOAssignNode from '~/DSONode/DSOAssignNode.js';
 import DSOBinaryNode from '~/DSONode/DSOBinaryNode.js';
 
 import assert        from '~/util/assert.js';
-import operatorToStr from '~/common/opcodes/operatorToStr.js';
+import operatorToStr from '~/common/ops/operatorToStr.js';
 
 
 const generateUnary = function ( node )

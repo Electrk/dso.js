@@ -3,7 +3,7 @@ import DSOControlBlock from '~/DSOControlBlock/DSOControlBlock.js';
 
 import { has } from '~/util/has.js';
 
-import { getOpcodeSubtype } from '~/common/opcodes/getOpcodeType.js';
+import { getOpSubtype } from '~/common/ops/getOpType.js';
 
 import * as scanNext       from '~/DSODisassembler/scanNext.js';
 import * as handleSingle   from '~/DSODisassembler/handleSingle.js';
@@ -77,7 +77,7 @@ class DSODisassembler
 
 	advanceIfSubtype ( subtype )
 	{
-		if ( getOpcodeSubtype (this.peek ()) === subtype )
+		if ( getOpSubtype (this.peek ()) === subtype )
 		{
 			this.advance ();
 			return true;

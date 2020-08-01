@@ -1,6 +1,6 @@
 import { DSODisassemblerError } from '~/decompiler/errors.js';
 
-import { getOpcodeType, getOpcodeSubtype } from '~/common/opcodes/getOpcodeType.js';
+import { getOpType, getOpSubtype } from '~/common/ops/getOpType.js';
 
 
 const scanNext = function ()
@@ -10,8 +10,8 @@ const scanNext = function ()
 	const opcode  = this.advance ();
 	const opname  = this.opcodeSet.getOpname (opcode);
 
-	const type    = getOpcodeType (opname);
-	const subtype = getOpcodeSubtype (opname);
+	const type    = getOpType (opname);
+	const subtype = getOpSubtype (opname);
 
 	this.handleMarkers (ip);
 

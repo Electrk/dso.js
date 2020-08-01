@@ -1,4 +1,4 @@
-const opcodeSubtypes =
+const opSubtypes =
 {
 	OP_STR_TO_UINT: 'OpcodeConvert',
 	OP_STR_TO_FLT:  'OpcodeConvert',
@@ -113,4 +113,4 @@ const opcodeSubtypes =
 };
 
 
-export default opcodeSubtypes;
+export default opSubtypes;
