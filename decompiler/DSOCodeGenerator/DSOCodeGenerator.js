@@ -64,22 +64,6 @@ class DSOCodeGenerator
 
 		return node2.inParens && node2.getPrecedence () >= node1.getPrecedence ();
 	}
-
-	/**
-	 * @param {Array} array
-	 */
-	indent ( array )
-	{
-		array.push (++this.indentation);
-	}
-
-	/**
-	 * @param {Array} array
-	 */
-	unindent ( array )
-	{
-		array.push (--this.indentation);
-	}
 }
 
 Object.assign (DSOCodeGenerator.prototype,
