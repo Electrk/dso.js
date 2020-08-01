@@ -1,9 +1,12 @@
-import stringEncryption from '~/common/strings/stringEncryption.js';
-import escapeChars      from '~/common/strings/escapeChars.js';
+import escapeChars from '~/common/strings/escapeChars.js';
 
 import { DSOLoaderError } from '~/decompiler/errors.js';
 
 
+/**
+ * @param {integer} [chars=1]           - Number of characters to read.
+ * @param {string}  [encoding="binary"] - You almost certainly won't need to change this.
+ */
 const readString = function ( chars = 1, encoding = 'binary' )
 {
 	if ( chars <= 0 )
@@ -31,9 +34,14 @@ const readStringTable = function ()
 
 	if ( size > 0 )
 	{
-		strings = stringEncryption (this.readString (size));
+		strings = this.readString (size);
 	}
 
+	return strings;
+};
+
+const buildStringTable = function ( strings )
+{
 	const table = {};
 
 	let currString = '';
@@ -67,4 +75,4 @@ const readStringTable = function ()
 };
 
 
-export { readString, readStringTable };
+export { readString, readStringTable, buildStringTable };
