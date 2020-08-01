@@ -2,8 +2,6 @@ import assert from '~/util/assert.js';
 
 import { DSOLoaderError } from '~/decompiler/errors.js';
 
-import { DSO_VERSION } from '~/common/constants.js';
-
 import * as getTableValue from '~/DSOLoader/getTableValue.js';
 import * as readNumber    from '~/DSOLoader/readNumber.js';
 import * as readString    from '~/DSOLoader/readString.js';
@@ -17,16 +15,23 @@ import * as readString    from '~/DSOLoader/readString.js';
 class DSOLoader
 {
 	/**
-	 * @param {Buffer} buffer - File buffer for open DSO file.
+	 * @param {Buffer}     buffer  - File buffer for open DSO file.
+	 * @param {DSOOpcodes} opcodes - Opcode set we're using.
 	 */
-	constructor ( buffer = null )
+	constructor ( buffer = null, opcodes = null )
 	{
 		if ( buffer === null )
 		{
 			throw new DSOLoaderError ('Missing required argument: `buffer`');
 		}
 
+		if ( opcodes === null )
+		{
+			throw new DSOLoaderError ('Missing required argument: `opcodes`');
+		}
+
 		this.buffer  = buffer;
+		this.opcodes = opcodes;
 		this.currPos = 0;
 
 		this.code = [];
@@ -45,9 +50,11 @@ class DSOLoader
 	{
 		const fileVersion = this.readInteger (true);
 
-		if ( fileVersion !== DSO_VERSION )
+		const { version } = this.opcodes;
+
+		if ( fileVersion !== version )
 		{
-			throw new DSOLoaderError (`Invalid DSO version: Expected ${DSO_VERSION}, got ${fileVersion}`);
+			throw new DSOLoaderError (`Invalid DSO version: Expected ${version}, got ${fileVersion}`);
 		}
 
 		this.globalStringTable   = this.readStringTable ();

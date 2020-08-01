@@ -10,16 +10,18 @@ import * as operatorToStr from '~/DSOOpcodes/operatorToStr.js';
 class DSOOpcodes
 {
 	/**
-	 * @param {string[]} opnames
+	 * @param {string[]} opnames - A list of opcode names.
+	 * @param {integer}  version - DSO version.
 	 */
-	constructor ( opnames )
+	constructor ( opnames, version )
 	{
 		this.opnames = opnames;
 		this.opcodes = enumerate (opnames);
+		this.version = version;
 	}
 
 	/**
-	 * Checks if it's a non-filler opcode.
+	 * Checks if it's a valid opcode.
 	 *
 	 * @param   {string|integer} op
 	 * @returns {boolean}
@@ -30,11 +32,10 @@ class DSOOpcodes
 
 		if ( typeof op === 'number' )
 		{
-			return op >= 0 && op < this.opnames.length &&
-			       op !== opcodes.FILLER1 && op !== opcodes.FILLER2;
+			return op >= 0 && op < this.opnames.length;
 		}
 
-		return has (opcodes, op) && op !== 'FILLER1' && op !== 'FILLER2';
+		return has (opcodes, op);
 	}
 }
 

@@ -13,7 +13,7 @@ const associative = new Set (
 
 
 /**
- * @param   {string}  op
+ * @param   {string} op
  * @returns {boolean}
  */
 const isOpAssociative = op =>

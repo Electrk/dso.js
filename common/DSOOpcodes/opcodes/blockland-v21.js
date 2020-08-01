@@ -1,3 +1,5 @@
+const versionBLv21 = 210;
+
 const opcodesBLv21 =
 [
 	'OP_UINT_TO_FLT',              /*  0x00  */
@@ -87,4 +89,4 @@ const opcodesBLv21 =
 ];
 
 
-export default opcodesBLv21;
+export { versionBLv21, opcodesBLv21 };
