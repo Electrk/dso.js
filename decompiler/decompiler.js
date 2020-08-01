@@ -1,9 +1,10 @@
-import DSOOpcodeSet     from '~/DSOOpcodeSet/DSOOpcodeSet.js';
 import DSOLoader        from '~/DSOLoader/DSOLoader.js';
 import DSOControlBlock  from '~/DSOControlBlock/DSOControlBlock.js';
 import DSODisassembler  from '~/DSODisassembler/DSODisassembler.js';
 import DSOParser        from '~/DSOParser/DSOParser.js';
 import DSOCodeGenerator from '~/DSOCodeGenerator/DSOCodeGenerator.js';
+
+import createOpcodeSet from '~/DSOOpcodeSet/createOpcodeSet.js';
 
 import
 {
@@ -29,9 +30,9 @@ from '~/decompiler/errors.js';
  */
 const decompileDSO = ( buffer, options = {} ) =>
 {
-	const { outputArray = false } = options;
+	const { opcodeSetName = 'blockland-v21', outputArray = false } = options;
 
-	const loader = new DSOLoader (buffer);
+	const loader = new DSOLoader (buffer, createOpcodeSet (opcodeSetName));
 
 	loader.read ();
 
