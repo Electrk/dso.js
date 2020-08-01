@@ -1,27 +1,27 @@
 import assert from '~/util/assert.js';
 
-import readFuncBLv21 from '~/DSOLoader/readFuncs/blockland-v21.js';
-
 import { DSOLoaderError } from '~/decompiler/errors.js';
 
 import * as getTableValue from '~/DSOLoader/getTableValue.js';
 import * as readNumber    from '~/DSOLoader/readNumber.js';
 import * as readString    from '~/DSOLoader/readString.js';
 
+import * as blv21 from '~/DSOLoader/readFuncs/blockland-v21.js';
+
 
 /**
  * Reads raw DSO file buffer and unencrypts string tables -- does not parse opcodes.
  *
- * @usage Create a DSOLoader instance with a file buffer as the argument, then call .read()
+ * @usage Create a DSOLoader instance with a file buffer and opcode set as arguments, then call .read()
  */
 class DSOLoader
 {
 	/**
-	 * @param {Buffer}       buffer     - File buffer for open DSO file.
-	 * @param {DSOOpcodeSet} opcodeSet  - Opcode set we're using.
-	 * @param {Function}     [readFunc] - Version-specific function for reading DSOs.
+	 * @param {Buffer}       buffer           - File buffer for open DSO file.
+	 * @param {DSOOpcodeSet} opcodeSet        - Opcode set we're using.
+	 * @param {Function}     [readFunc=blv21] - Version-specific function for reading DSOs.
 	 */
-	constructor ( buffer = null, opcodeSet = null, readFunc = readFuncBLv21 )
+	constructor ( buffer = null, opcodeSet = null, readFunc = blv21 )
 	{
 		if ( buffer === null )
 		{

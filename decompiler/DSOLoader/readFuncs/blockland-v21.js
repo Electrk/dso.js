@@ -1,4 +1,4 @@
-const readFuncBLv21 = function ()
+const readFunc = function ()
 {
 	this.readVersion ();
 
@@ -16,4 +16,4 @@ const readFuncBLv21 = function ()
 };
 
 
-export default readFuncBLv21;
+export { readFunc };
