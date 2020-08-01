@@ -1,12 +1,9 @@
-import { names, isOpcode } from '~/common/opcodes.js';
-
-
 const opToStr =
 {
 	'OP_NOT':            '!',
 	'OP_NOTF':           '!',
 	'OP_ONESCOMPLEMENT': '~',
-	'OP_NEG':            '<NEG>',
+	'OP_NEG':            '<NEG>',  // To prevent conflicts with OP_SUB
 
 	'OP_ADD': '+',
 	'OP_SUB': '-',
@@ -37,18 +34,23 @@ const opToStr =
 
 
 /**
- * @param   {integer} op
+ * @param   {string|integer} op
  * @returns {string|null} null if not a valid opcode.
  */
-const operatorToStr = op =>
+const operatorToStr = function ( op )
 {
-	if ( !isOpcode (op) )
+	if ( typeof op === 'number' )
+	{
+		op = this.opnames[op];
+	}
+
+	if ( !this.isOpcode (op) )
 	{
 		return null;
 	}
 
-	return opToStr[names[op]];
+	return opToStr[op];
 };
 
 
-export default operatorToStr;
+export { operatorToStr };

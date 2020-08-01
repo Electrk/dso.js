@@ -9,11 +9,16 @@ const opToSubtype = mapOpsToValue (opcodeSubtypes);
 
 
 /**
- * @param   {integer} op
+ * @param   {string|integer} op
  * @returns {string|null} null if not found
  */
-const getOpcodeType = op =>
+const getOpcodeType = function ( op )
 {
+	if ( typeof op === 'number' )
+	{
+		op = this.opnames[op];
+	}
+
 	if ( has (opToType, op) )
 	{
 		return opToType[op];
@@ -23,11 +28,16 @@ const getOpcodeType = op =>
 };
 
 /**
- * @param   {integer} op
+ * @param   {string|integer} op
  * @returns {string|null} null if not found
  */
-const getOpcodeSubtype = op =>
+const getOpcodeSubtype = function ( op )
 {
+	if ( typeof op === 'number' )
+	{
+		op = this.opnames[op];
+	}
+
 	if ( has (opToSubtype, op) )
 	{
 		return opToSubtype[op];

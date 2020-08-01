@@ -3,7 +3,7 @@ import { createOpset } from '~/common/opcodes.js';
 
 const opcodeSubtypes =
 {
-	OpcodeConvert: createOpset (
+	OpcodeConvert:
 	[
 		'OP_STR_TO_UINT',
 		'OP_STR_TO_FLT',
@@ -13,57 +13,57 @@ const opcodeSubtypes =
 
 		'OP_UINT_TO_FLT',
 		'OP_UINT_TO_STR',
-	]),
+	],
 
-	OpcodeTypeToNone: createOpset (
+	OpcodeTypeToNone:
 	[
 		'OP_STR_TO_NONE',
 		'OP_STR_TO_NONE_2',
 		'OP_FLT_TO_NONE',
 		'OP_UINT_TO_NONE',
-	]),
+	],
 
-	OpcodeLoadImmed: createOpset (
+	OpcodeLoadImmed:
 	[
 		'OP_LOADIMMED_UINT',
 		'OP_LOADIMMED_FLT',
 		'OP_LOADIMMED_STR',
 		'OP_LOADIMMED_IDENT',
 		'OP_TAG_TO_STR',
-	]),
+	],
 
-	OpcodeJump: createOpset (
+	OpcodeJump:
 	[
 		'OP_JMP',
-	]),
+	],
 
-	OpcodeLoopJump: createOpset (
+	OpcodeLoopJump:
 	[
 		'OP_JMPIF',
 		'OP_JMPIFF',
-	]),
+	],
 
-	OpcodeJumpIfNot: createOpset (
+	OpcodeJumpIfNot:
 	[
 		'OP_JMPIFNOT',
 		'OP_JMPIFFNOT',
-	]),
+	],
 
-	OpcodeLogicJump: createOpset (
+	OpcodeLogicJump:
 	[
 		'OP_JMPIF_NP',
 		'OP_JMPIFNOT_NP',
-	]),
+	],
 
-	OpcodeUnary: createOpset (
+	OpcodeUnary:
 	[
 		'OP_NOT',
 		'OP_NOTF',
 		'OP_ONESCOMPLEMENT',
 		'OP_NEG',
-	]),
+	],
 
-	OpcodeBinary: createOpset (
+	OpcodeBinary:
 	[
 		'OP_ADD',
 		'OP_SUB',
@@ -86,135 +86,135 @@ const opcodeSubtypes =
 
 		'OP_OR',
 		'OP_AND',
-	]),
+	],
 
-	OpcodeCompareStr: createOpset (
+	OpcodeCompareStr:
 	[
 		'OP_COMPARE_STR',
-	]),
+	],
 
-	OpcodeSaveVar: createOpset (
+	OpcodeSaveVar:
 	[
 		'OP_SAVEVAR_STR',
 		'OP_SAVEVAR_UINT',
 		'OP_SAVEVAR_FLT',
-	]),
+	],
 
-	OpcodeLoadVar: createOpset (
+	OpcodeLoadVar:
 	[
 		'OP_LOADVAR_STR',
 		'OP_LOADVAR_UINT',
 		'OP_LOADVAR_FLT',
-	]),
+	],
 
-	OpcodeSaveField: createOpset (
+	OpcodeSaveField:
 	[
 		'OP_SAVEFIELD_STR',
 		'OP_SAVEFIELD_UINT',
 		'OP_SAVEFIELD_FLT',
-	]),
+	],
 
-	OpcodeLoadField: createOpset (
+	OpcodeLoadField:
 	[
 		'OP_LOADFIELD_STR',
 		'OP_LOADFIELD_UINT',
 		'OP_LOADFIELD_FLT',
-	]),
+	],
 
-	OpcodeSetCurVar: createOpset (
+	OpcodeSetCurVar:
 	[
 		'OP_SETCURVAR',
 		'OP_SETCURVAR_CREATE',
-	]),
+	],
 
-	OpcodeSetCurField: createOpset (
+	OpcodeSetCurField:
 	[
 		'OP_SETCURFIELD',
-	]),
+	],
 
-	OpcodeSetVarArr: createOpset (
+	OpcodeSetVarArr:
 	[
 		'OP_SETCURVAR_ARRAY',
 		'OP_SETCURVAR_ARRAY_CREATE',
-	]),
+	],
 
-	OpcodeSetFieldArr: createOpset (
+	OpcodeSetFieldArr:
 	[
 		'OP_SETCURFIELD_ARRAY',
-	]),
+	],
 
-	OpcodeSetCurObject: createOpset (
+	OpcodeSetCurObject:
 	[
 		'OP_SETCUROBJECT',
 		'OP_SETCUROBJECT_NEW',
-	]),
+	],
 
-	OpcodeStringStart: createOpset (
+	OpcodeStringStart:
 	[
 		'OP_ADVANCE_STR',
 		'OP_ADVANCE_STR_APPENDCHAR',
 		'OP_ADVANCE_STR_COMMA',
-	]),
+	],
 
-	OpcodeStringEnd: createOpset (
+	OpcodeStringEnd:
 	[
 		'OP_REWIND_STR',
 		'OP_TERMINATE_REWIND_STR',
-	]),
+	],
 
-	OpcodeFuncDecl: createOpset (
+	OpcodeFuncDecl:
 	[
 		'OP_FUNC_DECL',
-	]),
+	],
 
-	OpcodeFuncCall: createOpset (
+	OpcodeFuncCall:
 	[
 		'OP_CALLFUNC',
 		'OP_CALLFUNC_RESOLVE',
-	]),
+	],
 
-	OpcodeCreateObj: createOpset (
+	OpcodeCreateObj:
 	[
 		'OP_CREATE_OBJECT',
-	]),
+	],
 
-	OpcodeObjSection: createOpset (
+	OpcodeObjSection:
 	[
 		'OP_ADD_OBJECT',
 		'OP_END_OBJECT',
-	]),
+	],
 
-	OpcodePushFrame: createOpset (
+	OpcodePushFrame:
 	[
 		'OP_PUSH_FRAME',
-	]),
+	],
 
-	OpcodePush: createOpset (
+	OpcodePush:
 	[
 		'OP_PUSH',
-	]),
+	],
 
-	OpcodeReturn: createOpset (
+	OpcodeReturn:
 	[
 		'OP_RETURN',
-	]),
+	],
 
 	// Opcodes we can skip.
-	OpcodeSkip: createOpset (
+	OpcodeSkip:
 	[
 		'OP_ADVANCE_STR_NUL',
-	]),
+	],
 
 	// Opcodes that throw an error should we come across them.
-	OpcodeError: createOpset (
+	OpcodeError:
 	[
 		'OP_INVALID',
-	]),
+	],
 
-	OpcodeMisc: createOpset (
+	OpcodeMisc:
 	[
 		'OP_BREAK',
-	]),
+	],
 };
 
 

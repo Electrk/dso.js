@@ -1,7 +1,4 @@
-import { createOpset } from '~/common/opcodes.js';
-
-
-const associative = createOpset (
+const associative = new Set (
 [
 	'OP_ADD',
 	'OP_MUL',
@@ -16,10 +13,10 @@ const associative = createOpset (
 
 
 /**
- * @param   {integer} op
+ * @param   {string}  op
  * @returns {boolean}
  */
-const isOpAssociative = op =>
+const isOpAssociative = function ( op )
 {
 	return associative.has (op);
 };

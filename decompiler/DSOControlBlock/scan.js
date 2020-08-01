@@ -2,9 +2,6 @@ import assert    from '~/util/assert.js';
 import getOpSize from '~/decompiler/opcodes/getOpSize.js';
 
 import { getOpcodeSubtype } from '~/decompiler/opcodes/getOpcodeType.js';
-import { enums }            from '~/common/opcodes.js';
-
-const { OP_JMPIF_NP, OP_JMPIFNOT_NP } = enums;
 
 
 /**
@@ -44,13 +41,9 @@ const scan = function ( code )
 			{
 				const jump = this.addJump (ip, code[ip + 1], this);
 
-				if ( op === OP_JMPIF_NP )
+				if ( subtype === 'OpcodeLogicJump' )
 				{
-					jump.setType ('OR');
-				}
-				else if ( op === OP_JMPIFNOT_NP )
-				{
-					jump.setType ('AND');
+					jump.setType ('logicOp');
 				}
 			}
 			else if ( subtype === 'OpcodeLoopJump' )

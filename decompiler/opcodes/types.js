@@ -4,7 +4,7 @@ import { createOpset } from '~/common/opcodes.js';
 const opcodeTypes =
 {
 	// Opcodes with no additional values.
-	OpcodeSingle: createOpset (
+	OpcodeSingle:
 	[
 		'OP_STR_TO_UINT',
 		'OP_STR_TO_FLT',
@@ -61,10 +61,10 @@ const opcodeTypes =
 		'OP_PUSH',
 		'OP_RETURN',
 		'OP_BREAK',
-	]),
+	],
 
 	// Opcodes with a single value after them.
-	OpcodeSinglePrefix: createOpset (
+	OpcodeSinglePrefix:
 	[
 		'OP_LOADIMMED_UINT',
 		'OP_LOADIMMED_FLT',
@@ -86,49 +86,49 @@ const opcodeTypes =
 
 		'OP_ADD_OBJECT',
 		'OP_END_OBJECT',
-	]),
+	],
 
 	// Opcodes with three values after them.
-	OpcodeTriplePrefix: createOpset (
+	OpcodeTriplePrefix:
 	[
 		'OP_CALLFUNC',
 		'OP_CALLFUNC_RESOLVE',
 		'OP_CREATE_OBJECT',
-	]),
+	],
 
 	// Opcodes that start a string section.
-	OpcodeStringStart: createOpset (
+	OpcodeStringStart:
 	[
 		'OP_ADVANCE_STR',
 		'OP_ADVANCE_STR_APPENDCHAR',
 		'OP_ADVANCE_STR_COMMA',
-	]),
+	],
 
 	// Opcodes that end a string section.
-	OpcodeStringEnd: createOpset (
+	OpcodeStringEnd:
 	[
 		'OP_REWIND_STR',
 		'OP_TERMINATE_REWIND_STR',
-	]),
+	],
 
 	// Opcodes that start a loop or conditional.
-	OpcodeJumpIfNot: createOpset (
+	OpcodeJumpIfNot:
 	[
 		'OP_JMPIFNOT',
 		'OP_JMPIFFNOT',
-	]),
+	],
 
 	// Special type for the function declaration opcode just because it's so different.
-	OpcodeFuncDecl: createOpset (
+	OpcodeFuncDecl:
 	[
 		'OP_FUNC_DECL',
-	]),
+	],
 
 	// Opcodes that throw an error should we come across them.
-	OpcodeError: createOpset (
+	OpcodeError:
 	[
 		'OP_INVALID',
-	]),
+	],
 };
 
 

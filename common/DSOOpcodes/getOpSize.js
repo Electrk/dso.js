@@ -1,21 +1,14 @@
-import { enums } from '~/common/opcodes.js';
-
-import { getOpcodeType, getOpcodeSubtype } from '~/decompiler/opcodes/getOpcodeType.js';
-
-const { OP_ADVANCE_STR_APPENDCHAR } = enums;
-
-
 /**
  * @param {integer[]} code
  * @param {integer}   ip
  *
  * @returns {integer} How many positions it takes up. 0 if invalid opcode.
  */
-const getOpSize = ( code, ip ) =>
+const getOpSize = function ( code, ip )
 {
 	const op      = code[ip];
-	const type    = getOpcodeType (op);
-	const subtype = getOpcodeSubtype (op);
+	const type    = this.getOpcodeType (op);
+	const subtype = this.getOpcodeSubtype (op);
 
 	switch ( type )
 	{
@@ -34,7 +27,7 @@ const getOpSize = ( code, ip ) =>
 		case 'OpcodeStringStart':
 		case 'OpcodeStringEnd':
 		{
-			if ( op === OP_ADVANCE_STR_APPENDCHAR )
+			if ( op === this.opcodes.OP_ADVANCE_STR_APPENDCHAR )
 			{
 				return 2;
 			}
@@ -52,4 +45,4 @@ const getOpSize = ( code, ip ) =>
 };
 
 
-export default getOpSize;
+export { getOpSize };

@@ -6,8 +6,7 @@ const map =
 	'conditional': 'MarkerCondEnd',
 	'loop':        'MarkerLoopEnd',
 	'ifElse':      'MarkerElseEnd',
-	'OR':          'MarkerLogicEnd',
-	'AND':         'MarkerLogicEnd',
+	'logicOp':     'MarkerLogicEnd',
 };
 
 const jumpTypeToMarker = jumpType =>

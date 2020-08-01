@@ -14,7 +14,7 @@ class DSOJumpInfo
 		this.destIP   = destIP;
 		this.block    = block;
 
-		// OR, AND, break, continue, or ifElse
+		// logicOp, break, continue, or ifElse
 		this.type = 'ifElse';
 
 		// Whether the type was not set and just defaulted to ifElse.
@@ -22,7 +22,7 @@ class DSOJumpInfo
 	}
 
 	/**
-	 * @param {string} type - OR, AND, break, continue, or ifElse
+	 * @param {string} type - logicOp, break, continue, or ifElse
 	 */
 	setType ( type )
 	{

@@ -51,10 +51,8 @@ const decompileDSO = ( buffer, options = {} ) =>
 	{
 		return generator.generateCodeArray ();
 	}
-	else
-	{
-		return generator.generateCode ();
-	}
+
+	return generator.generateCode ();
 };
 
 
