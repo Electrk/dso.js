@@ -99,10 +99,11 @@ class DSODisassembler
 
 	advanceConstant ( op )
 	{
-		const inFunction = this.funcEndIP !== null;
+		const opname     = this.opcodes.getOpname (op);
 		const value      = this.advance ();
+		const inFunction = this.funcEndIP !== null;
 
-		return this.loader.getTableValue (op, value, inFunction);
+		return this.loader.getTableValue (opname, value, inFunction);
 	}
 
 	hasIdent ( ip )

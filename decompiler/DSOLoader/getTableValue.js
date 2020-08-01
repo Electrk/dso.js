@@ -1,17 +1,6 @@
 import { DSOLoaderError } from '~/decompiler/errors.js';
 
-import { has }   from '~/util/has.js';
-import { enums } from '~/common/opcodes.js';
-
-const
-{
-	OP_LOADIMMED_UINT,
-	OP_LOADIMMED_FLT,
-	OP_LOADIMMED_STR,
-	OP_LOADIMMED_IDENT,
-	OP_TAG_TO_STR,
-}
-= enums;
+import { has } from '~/util/has.js';
 
 
 const getString = function ( index, isFunction = false )
@@ -34,26 +23,26 @@ const getTableValue = function ( op, value, inFunction )
 
 	switch ( op )
 	{
-		case OP_LOADIMMED_STR:
-		case OP_TAG_TO_STR:
+		case 'OP_LOADIMMED_STR':
+		case 'OP_TAG_TO_STR':
 		{
 			tableValue = this.getString (value, inFunction);
 			break;
 		}
 
-		case OP_LOADIMMED_IDENT:
+		case 'OP_LOADIMMED_IDENT':
 		{
 			tableValue = this.getString (value, false);
 			break;
 		}
 
-		case OP_LOADIMMED_FLT:
+		case 'OP_LOADIMMED_FLT':
 		{
 			tableValue = this.getFloat (value, inFunction);
 			break;
 		}
 
-		case OP_LOADIMMED_UINT:
+		case 'OP_LOADIMMED_UINT':
 		{
 			tableValue = value;
 			break;
