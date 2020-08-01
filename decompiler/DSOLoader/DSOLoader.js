@@ -1,5 +1,7 @@
 import assert from '~/util/assert.js';
 
+import readFuncBLv21 from '~/DSOLoader/readFuncs/blockland-v21.js';
+
 import { DSOLoaderError } from '~/decompiler/errors.js';
 
 import * as getTableValue from '~/DSOLoader/getTableValue.js';
@@ -19,7 +21,7 @@ class DSOLoader
 	 * @param {DSOOpcodes} opcodes    - Opcodes we're using.
 	 * @param {Function}   [readFunc] - Version-specific function for reading DSOs.
 	 */
-	constructor ( buffer = null, opcodes = null, readFunc = () => {} )
+	constructor ( buffer = null, opcodes = null, readFunc = readFuncBLv21 )
 	{
 		if ( buffer === null )
 		{
