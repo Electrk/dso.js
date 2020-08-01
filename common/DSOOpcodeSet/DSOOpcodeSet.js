@@ -1,8 +1,7 @@
-import { has } from '~/util/has.js';
-
 import enumerate from '~/util/enumerate.js';
 
-import * as getOpSize from '~/DSOOpcodeSet/getOpSize.js';
+import { has }       from '~/util/has.js';
+import { getOpType } from '~/common/ops/getOpType.js';
 
 
 class DSOOpcodeSet
@@ -53,9 +52,52 @@ class DSOOpcodeSet
 
 		return has (opcodes, op);
 	}
-}
 
-Object.assign (DSOOpcodeSet.prototype, { ...getOpSize });
+	/**
+	 * @param {integer[]} code
+	 * @param {integer}   ip
+	 *
+	 * @returns {integer} How many positions it takes up. 0 if invalid opcode.
+	 */
+	getOpSize ( code, ip )
+	{
+		const op   = this.getOpname (code[ip]);
+		const type = getOpType (op);
+
+		switch ( type )
+		{
+			case 'OpcodeSinglePrefix':
+			case 'OpcodeJumpIfNot':
+			{
+				return 2;
+			}
+
+			case 'OpcodeTriplePrefix':
+			{
+				return 4;
+			}
+
+			case 'OpcodeSingle':
+			case 'OpcodeStringStart':
+			case 'OpcodeStringEnd':
+			{
+				if ( op === 'OP_ADVANCE_STR_APPENDCHAR' )
+				{
+					return 2;
+				}
+
+				return 1;
+			}
+
+			case 'OpcodeFuncDecl':
+			{
+				return 7 + code[ip + 6];
+			}
+		}
+
+		return 0;
+	}
+}
 
 
 export default DSOOpcodeSet;
