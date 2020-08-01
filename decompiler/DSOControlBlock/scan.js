@@ -10,8 +10,9 @@ import { getOpcodeSubtype } from '~/common/opcodes/getOpcodeType.js';
  */
 const scan = function ( loader )
 {
-	const { end }           = this;
-	const { code, opcodes } = loader;
+	const { end } = this;
+
+	const { code, opcodeSet } = loader;
 
 	let ip = this.start;
 
@@ -28,11 +29,11 @@ const scan = function ( loader )
 	while ( ip < end )
 	{
 		const op      = code[ip];
-		const subtype = getOpcodeSubtype (op);
+		const subtype = getOpcodeSubtype (opcodeSet.getOpname (op));
 
 		if ( subtype === 'OpcodeJumpIfNot' )
 		{
-			this.addBlock (ip, code[ip + 1], this).scan (code);
+			this.addBlock (ip, code[ip + 1], this).scan (loader);
 			ip = code[ip + 1];
 		}
 		else
@@ -53,7 +54,7 @@ const scan = function ( loader )
 				this.type = 'loop';
 			}
 
-			const size = opcodes.getOpSize (code, ip);
+			const size = opcodeSet.getOpSize (code, ip);
 
 			assert (size > 0, `Invalid opcode ${op} at ${ip}`);
 
