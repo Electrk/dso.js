@@ -2,11 +2,7 @@ import DSOAssignNode from '~/DSONode/DSOAssignNode.js';
 import DSOBinaryNode from '~/DSONode/DSOBinaryNode.js';
 
 import assert        from '~/util/assert.js';
-import operatorToStr from '~/decompiler/opcodes/operatorToStr.js';
-
-import { enums } from '~/common/opcodes.js';
-
-const { OP_COMPARE_STR } = enums;
+import operatorToStr from '~/common/opcodes/operatorToStr.js';
 
 
 const generateUnary = function ( node )
@@ -17,7 +13,7 @@ const generateUnary = function ( node )
 
 	const { expr } = node;
 
-	if ( operator === '!' && expr instanceof DSOBinaryNode && expr.op === OP_COMPARE_STR )
+	if ( operator === '!' && expr instanceof DSOBinaryNode && expr.op === 'OP_COMPARE_STR' )
 	{
 		return [this.generateBranch (expr, expr.left), '!$=', this.generateBranch (expr, expr.right)];
 	}
