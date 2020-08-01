@@ -1,11 +1,7 @@
 import { has } from '~/util/has.js';
 
-import mapOpsToValue  from '~/common/mapOpsToValue.js';
-import opcodeTypes    from '~/decompiler/opcodes/types.js';
-import opcodeSubtypes from '~/decompiler/opcodes/subtypes.js';
-
-const opToType    = mapOpsToValue (opcodeTypes);
-const opToSubtype = mapOpsToValue (opcodeSubtypes);
+import opcodeTypes    from '~/DSOOpcodes/types.js';
+import opcodeSubtypes from '~/DSOOpcodes/subtypes.js';
 
 
 /**
@@ -19,9 +15,9 @@ const getOpcodeType = function ( op )
 		op = this.opnames[op];
 	}
 
-	if ( has (opToType, op) )
+	if ( has (opcodeTypes, op) )
 	{
-		return opToType[op];
+		return opcodeTypes[op];
 	}
 
 	return null;
@@ -38,9 +34,9 @@ const getOpcodeSubtype = function ( op )
 		op = this.opnames[op];
 	}
 
-	if ( has (opToSubtype, op) )
+	if ( has (opcodeSubtypes, op) )
 	{
-		return opToSubtype[op];
+		return opcodeSubtypes[op];
 	}
 
 	return null;
