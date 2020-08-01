@@ -51,7 +51,6 @@ class DSOLoader
 
 	read ()
 	{
-		this.readVersion ();
 		this.readFunc ();
 	}
 

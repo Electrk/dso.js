@@ -1,5 +1,7 @@
 const readFuncBLv21 = function ()
 {
+	this.readVersion ();
+
 	this.globalStringTable   = this.readStringTable ();
 	this.globalFloatTable    = this.readFloatTable ();
 	this.functionStringTable = this.readStringTable ();
