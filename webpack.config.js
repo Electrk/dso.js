@@ -57,10 +57,10 @@ module.exports =
 	{
 		alias:
 		{
-			'~/common':      path.resolve (__dirname, './common/'),
-			'~/util':        path.resolve (__dirname, './common/util/'),
-			'~/ArrayMap.js': path.resolve (__dirname, './common/ArrayMap.js'),
-			'~/DSOOpcodes':  path.resolve (__dirname, './common/DSOOpcodes/'),
+			'~/common':       path.resolve (__dirname, './common/'),
+			'~/util':         path.resolve (__dirname, './common/util/'),
+			'~/ArrayMap.js':  path.resolve (__dirname, './common/ArrayMap.js'),
+			'~/DSOOpcodeSet': path.resolve (__dirname, './common/DSOOpcodeSet/'),
 
 			'~/decompiler':       path.resolve (__dirname, './decompiler/'),
 			'~/DSOLoader':        path.resolve (__dirname, './decompiler/DSOLoader/'),

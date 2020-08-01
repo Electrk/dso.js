@@ -2,10 +2,10 @@ import { has } from '~/util/has.js';
 
 import enumerate from '~/util/enumerate.js';
 
-import * as getOpSize from '~/DSOOpcodes/getOpSize.js';
+import * as getOpSize from '~/DSOOpcodeSet/getOpSize.js';
 
 
-class DSOOpcodes
+class DSOOpcodeSet
 {
 	/**
 	 * @param {string[]} opnames - A list of opcode names.
@@ -55,7 +55,7 @@ class DSOOpcodes
 	}
 }
 
-Object.assign (DSOOpcodes.prototype, { ...getOpSize });
+Object.assign (DSOOpcodeSet.prototype, { ...getOpSize });
 
 
-export default DSOOpcodes;
+export default DSOOpcodeSet;

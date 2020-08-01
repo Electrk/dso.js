@@ -67,7 +67,7 @@ class DSODisassembler
 
 	peek ()
 	{
-		return this.opcodes.getOpname (this.code[this.ip]);
+		return this.opcodeSet.getOpname (this.code[this.ip]);
 	}
 
 	advance ()
@@ -99,7 +99,7 @@ class DSODisassembler
 
 	advanceConstant ( op )
 	{
-		const opname     = this.opcodes.getOpname (op);
+		const opname     = this.opcodeSet.getOpname (op);
 		const value      = this.advance ();
 		const inFunction = this.funcEndIP !== null;
 
@@ -136,9 +136,9 @@ class DSODisassembler
 		return this.loader.code;
 	}
 
-	get opcodes ()
+	get opcodeSet ()
 	{
-		return this.loader.opcodes;
+		return this.loader.opcodeSet;
 	}
 
 	get identTable ()

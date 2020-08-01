@@ -17,25 +17,25 @@ import * as readString    from '~/DSOLoader/readString.js';
 class DSOLoader
 {
 	/**
-	 * @param {Buffer}     buffer     - File buffer for open DSO file.
-	 * @param {DSOOpcodes} opcodes    - Opcodes we're using.
-	 * @param {Function}   [readFunc] - Version-specific function for reading DSOs.
+	 * @param {Buffer}       buffer     - File buffer for open DSO file.
+	 * @param {DSOOpcodeSet} opcodeSet  - Opcode set we're using.
+	 * @param {Function}     [readFunc] - Version-specific function for reading DSOs.
 	 */
-	constructor ( buffer = null, opcodes = null, readFunc = readFuncBLv21 )
+	constructor ( buffer = null, opcodeSet = null, readFunc = readFuncBLv21 )
 	{
 		if ( buffer === null )
 		{
 			throw new DSOLoaderError ('Missing required argument: `buffer`');
 		}
 
-		if ( opcodes === null )
+		if ( opcodeSet === null )
 		{
-			throw new DSOLoaderError ('Missing required argument: `opcodes`');
+			throw new DSOLoaderError ('Missing required argument: `opcodeSet`');
 		}
 
-		this.buffer   = buffer;
-		this.opcodes  = opcodes;
-		this.readFunc = readFunc;
+		this.buffer    = buffer;
+		this.opcodeSet = opcodeSet;
+		this.readFunc  = readFunc;
 
 		this.currPos = 0;
 
@@ -60,7 +60,7 @@ class DSOLoader
 	{
 		const fileVersion = this.readInteger (true);
 
-		const { version } = this.opcodes;
+		const { version } = this.opcodeSet;
 
 		if ( fileVersion !== version )
 		{

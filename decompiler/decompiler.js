@@ -1,3 +1,4 @@
+import DSOOpcodeSet     from '~/DSOOpcodeSet/DSOOpcodeSet.js';
 import DSOLoader        from '~/DSOLoader/DSOLoader.js';
 import DSOControlBlock  from '~/DSOControlBlock/DSOControlBlock.js';
 import DSODisassembler  from '~/DSODisassembler/DSODisassembler.js';

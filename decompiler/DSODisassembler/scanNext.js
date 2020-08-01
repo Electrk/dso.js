@@ -8,7 +8,7 @@ const scanNext = function ()
 	const { ip } = this;
 
 	const opcode  = this.advance ();
-	const opname  = this.opcodes.getOpname (opcode);
+	const opname  = this.opcodeSet.getOpname (opcode);
 
 	const type    = getOpcodeType (opname);
 	const subtype = getOpcodeSubtype (opname);
