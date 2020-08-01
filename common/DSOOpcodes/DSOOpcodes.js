@@ -20,6 +20,24 @@ class DSOOpcodes
 	}
 
 	/**
+	 * @param   {string} opname
+	 * @returns {integer|null} null if invalid opname
+	 */
+	getOpcode ( opname )
+	{
+		return this.isOpcode (opname) ? this.opcodes[opname] : null;
+	}
+
+	/**
+	 * @param   {string} opcode
+	 * @returns {integer|null} null if invalid opcode
+	 */
+	getOpname ( opcode )
+	{
+		return this.isOpcode (opcode) ? this.opnames[opcode] : null;
+	}
+
+	/**
 	 * Checks if it's a valid opcode.
 	 *
 	 * @param   {string|integer} op
