@@ -15,10 +15,11 @@ import * as readString    from '~/DSOLoader/readString.js';
 class DSOLoader
 {
 	/**
-	 * @param {Buffer}     buffer  - File buffer for open DSO file.
-	 * @param {DSOOpcodes} opcodes - Opcode set we're using.
+	 * @param {Buffer}     buffer     - File buffer for open DSO file.
+	 * @param {DSOOpcodes} opcodes    - Opcodes we're using.
+	 * @param {Function}   [readFunc] - Version-specific function for reading DSOs.
 	 */
-	constructor ( buffer = null, opcodes = null )
+	constructor ( buffer = null, opcodes = null, readFunc = () => {} )
 	{
 		if ( buffer === null )
 		{
@@ -30,8 +31,10 @@ class DSOLoader
 			throw new DSOLoaderError ('Missing required argument: `opcodes`');
 		}
 
-		this.buffer  = buffer;
-		this.opcodes = opcodes;
+		this.buffer   = buffer;
+		this.opcodes  = opcodes;
+		this.readFunc = readFunc;
+
 		this.currPos = 0;
 
 		this.code = [];
@@ -48,6 +51,12 @@ class DSOLoader
 
 	read ()
 	{
+		this.readVersion ();
+		this.readFunc ();
+	}
+
+	readVersion ()
+	{
 		const fileVersion = this.readInteger (true);
 
 		const { version } = this.opcodes;
@@ -56,29 +65,28 @@ class DSOLoader
 		{
 			throw new DSOLoaderError (`Invalid DSO version: Expected ${version}, got ${fileVersion}`);
 		}
+	}
 
-		this.globalStringTable   = this.readStringTable ();
-		this.globalFloatTable    = this.readFloatTable ();
-		this.functionStringTable = this.readStringTable ();
-		this.functionFloatTable  = this.readFloatTable ();
-
-		const codeSize          = this.readInteger (true);
-		const numLineBreakPairs = this.readInteger (true);
-
+	readCode ( codeSize )
+	{
 		for ( let i = 0; i < codeSize; i++ )
 		{
 			this.code.push (this.readCodeByte ());
 		}
+	}
 
-		const totalSize = codeSize + numLineBreakPairs * 2;
+	readLineBreaks ( codeSize, numPairs )
+	{
+		const totalSize = codeSize + numPairs * 2;
 
 		for ( let i = codeSize; i < totalSize; i++ )
 		{
 			this.lineBreakPairs.push (this.readInteger (true));
 		}
+	}
 
-		let numIdent = this.readInteger (true);
-
+	readIdentTable ( numIdent )
+	{
 		while ( numIdent-- )
 		{
 			let index = this.readInteger (true);
