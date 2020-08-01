@@ -1,9 +1,6 @@
 import DSOConstantNode from '~/DSONode/DSOConstantNode.js';
 
 import { DSOExprNode } from '~/DSONode/DSONode.js';
-import { enums }       from '~/common/opcodes.js';
-
-const { OP_LOADIMMED_IDENT } = enums;
 
 
 class DSOObjectDeclNode extends DSOExprNode
@@ -13,7 +10,7 @@ class DSOObjectDeclNode extends DSOExprNode
 		super ();
 
 		classExpr.inParens = !(classExpr instanceof DSOConstantNode) ||
-		                       classExpr.op !== OP_LOADIMMED_IDENT;
+		                       classExpr.op !== 'OP_LOADIMMED_IDENT';
 
 		this.classExpr = classExpr;
 		this.nameExpr  = nameExpr;

@@ -3,10 +3,6 @@ import DSOCommaCatNode  from '~/DSONode/DSOCommaCatNode.js';
 
 import assert from '~/util/assert.js';
 
-import { enums } from '~/common/opcodes.js';
-
-const { OP_ADVANCE_STR_COMMA } = enums;
-
 
 const parseString = function ( token, controlBlock = this.controlBlock )
 {
@@ -15,7 +11,7 @@ const parseString = function ( token, controlBlock = this.controlBlock )
 
 	assert (body.length === 1, `Strings can only have one expression (start pos: ${startPos})`);
 
-	if ( token.op === OP_ADVANCE_STR_COMMA )
+	if ( token.op === 'OP_ADVANCE_STR_COMMA' )
 	{
 		return new DSOCommaCatNode (this.popNode (), body[0]);
 	}

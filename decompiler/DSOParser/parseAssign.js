@@ -2,10 +2,6 @@ import DSOAssignNode   from '~/DSONode/DSOAssignNode.js';
 import DSOVariableNode from '~/DSONode/DSOVariableNode.js';
 import DSOSlotNode     from '~/DSONode/DSOSlotNode.js';
 
-import { enums } from '~/common/opcodes.js';
-
-const { OP_SETCUROBJECT } = enums;
-
 
 const parseAssign = function ( operator = null )
 {
@@ -44,7 +40,7 @@ const parseSlot = function ( op, isArray = false )
 	else
 	{
 		const slotName = this.advance ().value;
-		node = new DSOSlotNode (slotName, op === OP_SETCUROBJECT ? this.popNode () : null);
+		node = new DSOSlotNode (slotName, op === 'OP_SETCUROBJECT' ? this.popNode () : null);
 	}
 
 	this.advanceIfType ('OpcodeLoadField');
