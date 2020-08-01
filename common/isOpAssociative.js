@@ -16,10 +16,10 @@ const associative = new Set (
  * @param   {string}  op
  * @returns {boolean}
  */
-const isOpAssociative = function ( op )
+const isOpAssociative = op =>
 {
 	return associative.has (op);
 };
 
 
-export { isOpAssociative };
+export default isOpAssociative;

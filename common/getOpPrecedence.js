@@ -5,7 +5,7 @@ const precedence =
 {
 	OP_NOT: 1, OP_NOTF: 1, OP_NEG: 1, OP_ONESCOMPLEMENT: 1,
 	OP_MUL: 2, OP_DIV:  2, OP_MOD: 2,
-	OP_ADD: 3​, OP_SUB:  3,
+	OP_ADD: 3, OP_SUB:  3,
 	OP_SHL: 4, OP_SHR:  4,
 
 	OP_COMPARE_STR: 5,
@@ -26,16 +26,11 @@ const precedence =
 
 
 /**
- * @param   {string|integer} op
+ * @param   {string} op
  * @returns {integer} Infinity if no precedence specified.
  */
-const getOpPrecedence = function ( op )
+const getOpPrecedence = op =>
 {
-	if ( typeof op === 'number' )
-	{
-		op = this.opnames[op];
-	}
-
 	if ( has (precedence, op) )
 	{
 		return precedence[op];
@@ -45,4 +40,4 @@ const getOpPrecedence = function ( op )
 };
 
 
-export { getOpPrecedence };
+export default getOpPrecedence;

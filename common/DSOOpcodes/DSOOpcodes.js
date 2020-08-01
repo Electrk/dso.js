@@ -4,8 +4,6 @@ import enumerate from '~/util/enumerate.js';
 
 import * as getOpcodeType from '~/DSOOpcodes/getOpcodeType.js';
 import * as getOpSize     from '~/DSOOpcodes/getOpSize.js';
-import * as precedence    from '~/DSOOpcodes/precedence.js';
-import * as associativity from '~/DSOOpcodes/associativity.js';
 import * as operatorToStr from '~/DSOOpcodes/operatorToStr.js';
 
 
@@ -43,7 +41,6 @@ class DSOOpcodes
 Object.assign (DSOOpcodes.prototype,
 {
 	...getOpcodeType, ...getOpSize,
-	...precedence,    ...associativity,
 	...operatorToStr,
 });
 
