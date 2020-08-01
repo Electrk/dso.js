@@ -5,35 +5,46 @@ import * as blv21 from '~/DSOOpcodeSet/opcodes/blockland-v21.js';
 
 
 /**
- * @param   {string} setName
+ * @param   {string|Object} nameOrObject
+ * @param   {string[]}      [nameOrObject.opcodes] - List of opcode names.
+ * @param   {integer}       [nameOrObject.version] - DSO version to require.
+ *
  * @returns {DSOOpcodeSet}
  */
-const createOpcodeSet = setName =>
+const createOpcodeSet = nameOrObject =>
 {
 	let opcodes;
 	let version;
 
-	switch ( setName )
+	if ( typeof nameOrObject === 'object' )
 	{
-		case 'blockland-v20':
+		opcodes = nameOrObject.opcodes;
+		version = nameOrObject.version;
+	}
+	else
+	{
+		switch ( nameOrObject )
 		{
-			opcodes = blv20.opcodes;
-			version = blv20.version;
+			case 'blockland-v20':
+			{
+				opcodes = blv20.opcodes;
+				version = blv20.version;
 
-			break;
-		}
+				break;
+			}
 
-		case 'blockland-v21':
-		{
-			opcodes = blv21.opcodes;
-			version = blv21.version;
+			case 'blockland-v21':
+			{
+				opcodes = blv21.opcodes;
+				version = blv21.version;
 
-			break;
-		}
+				break;
+			}
 
-		default:
-		{
-			throw new Error (`Invalid opcode set name \`${setName}\``);
+			default:
+			{
+				throw new Error (`Invalid opcode set name \`${nameOrObject}\``);
+			}
 		}
 	}
 

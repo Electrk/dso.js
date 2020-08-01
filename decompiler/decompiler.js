@@ -25,11 +25,11 @@ import * as blv21 from '~/DSOLoader/readFuncs/blockland-v21.js';
  * For browsers, use the `buffer` npm package.
  * For Node.js, use the native Buffer class.
  *
- * @param {Buffer}   buffer
- * @param {Object}   [options={}]
- * @param {string}   [options.opcodeSet]   - Game-specific opcodes.
- * @param {Function} [options.readFunc]    - @see {DSOLoader}
- * @param {boolean}  [options.outputArray] - Whether to output a code string or code array.
+ * @param {Buffer}        buffer
+ * @param {Object}        [options={}]
+ * @param {string|Object} [options.opcodeSet]   - Game-specific opcodes.
+ * @param {Function}      [options.readFunc]    - @see {DSOLoader}
+ * @param {boolean}       [options.outputArray] - Whether to output a code string or code array.
  *
  * @returns {string|Array} Either a code string or code array, depending on the options set.
  */
