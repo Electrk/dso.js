@@ -23,14 +23,46 @@ class ObjectFactory
 
 		const factory = this;
 
+		factoryFunc = factoryFunc.bind (this);
+
 		this.create[objectType] = function ( key, ...args )
 		{
 			const config = factory.config[objectType].get (key);
 
-			return Object.assign (factoryFunc (...args), { key, factory, ...config });
+			return Object.assign (factoryFunc (key, ...args), { key, factory, ...config });
 		};
 
 		this.config[objectType] = new ObjectStore ();
+	}
+
+	/**
+	 * Shortcut Functions
+	 */
+
+	/**
+	 * @param {string} objectType
+	 * @param {string} key
+	 * @param {Object} config
+	 */
+	addConfig ( objectType, key, config )
+	{
+		assert (has (this.config, objectType), `Object type \`${objectType}\` not registered`);
+
+		this.config[objectType].add (key, config);
+	}
+
+	/**
+	 * @param {string} objectType
+	 * @param {string} key
+	 * @param {...*}   args
+	 *
+	 * @returns {Object}
+	 */
+	createObject ( objectType, key, ...args )
+	{
+		assert (has (this.create, objectType), `Object type \`${objectType}\` not registered`);
+
+		return this.create[objectType] (key, ...args);
 	}
 }
 
