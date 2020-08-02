@@ -1,64 +1,47 @@
-import DSOLoader        from '~/DSOLoader/DSOLoader.js';
-import DSOControlBlock  from '~/DSOControlBlock/DSOControlBlock.js';
-import DSODisassembler  from '~/DSODisassembler/DSODisassembler.js';
-import DSOParser        from '~/DSOParser/DSOParser.js';
-import DSOCodeGenerator from '~/DSOCodeGenerator/DSOCodeGenerator.js';
+import DSOFactory from '~/decompiler/DSOFactory.js';
+import DSOPlugins from '~/decompiler/DSOPlugins.js';
 
-import createOpcodeSet from '~/DSOOpcodeSet/createOpcodeSet.js';
+import { DSODecompilerError } from '~/decompiler/errors.js';
 
-import
+
+const decompileDSO = ( buffer, config = {} ) =>
 {
-	DSODecompilerError,
-	DSOLoaderError,
-	DSODisassemblerError,
-	DSOParserError,
-	DSOCodeGeneratorError,
-}
-from '~/decompiler/errors.js';
+	const { outputArray = false } = config;
 
-import * as blv21 from '~/DSOLoader/readFuncs/blockland-v21.js';
-
-
-/**
- * Decompiles a DSO file from a buffer.
- *
- * For browsers, use the `buffer` npm package.
- * For Node.js, use the native Buffer class.
- *
- * @param {Buffer}        buffer
- * @param {Object}        [options={}]
- * @param {string|Object} [options.opcodeSet]   - Game-specific opcodes.
- * @param {Function}      [options.readFunc]    - @see {DSOLoader}
- * @param {boolean}       [options.outputArray] - Whether to output a code string or code array.
- *
- * @returns {string|Array} Either a code string or code array, depending on the options set.
- */
-const decompileDSO = ( buffer, options = {} ) =>
-{
-	const
+	const keys =
 	{
-		opcodeSet   = 'blockland-v21',
-		readFunc    = blv21.readFunc,
-		outputArray = false,
-	}
-	= options;
+		opcodeSet:     'default',
+		loader:        'default',
+		controlBlock:  'default',
+		disassembler:  'default',
+		parser:        'default',
+		codeGenerator: 'default',
+	};
 
-	const loader = new DSOLoader (buffer, createOpcodeSet (opcodeSet), readFunc);
+	for ( let type in config )
+	{
+		keys[type] = config[type];
+	}
+
+	const { create } = DSOFactory;
+
+	const opcodeSet = create.opcodeSet (keys.opcodeSet);
+	const loader    = create.loader (keys.loader, buffer, opcodeSet);
 
 	loader.read ();
 
-	const controlBlock = new DSOControlBlock (0, loader.code.length);
+	const controlBlock = create.controlBlock (keys.controlBlock, 0, loader.code.length);
 
 	controlBlock.scan (loader);
 	controlBlock.analyzeJumps ();
 
-	const disassembler = new DSODisassembler (loader, controlBlock);
+	const disassembler = create.disassembler (keys.disassembler, loader, controlBlock);
 	const tokens       = disassembler.disassemble ();
 
-	const parser   = new DSOParser (tokens, controlBlock);
+	const parser   = create.parser (keys.parser, tokens, controlBlock);
 	const astNodes = parser.parse ();
 
-	const generator = new DSOCodeGenerator (astNodes);
+	const generator = create.codeGenerator (keys.codeGenerator, astNodes);
 
 	if ( outputArray )
 	{
@@ -73,15 +56,5 @@ export
 {
 	decompileDSO,
 
-	DSOLoader,
-	DSOControlBlock,
-	DSODisassembler,
-	DSOParser,
-	DSOCodeGenerator,
-
-	DSODecompilerError,
-	DSOLoaderError,
-	DSODisassemblerError,
-	DSOParserError,
-	DSOCodeGeneratorError,
+	DSOPlugins as plugins,
 };
