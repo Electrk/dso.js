@@ -23,8 +23,11 @@
     "terser-webpack-plugin": "^3.0.7",
     "webpack-cli": "^3.3.12"
   },
-  "description": "A DSO decompiler for Blockland.",
+  "description": "A DSO decompiler for the Torque Game Engine.",
   "keywords": [
+    "torque game engine",
+    "torque",
+    "tge",
     "blockland",
     "dso",
     "decompiler"

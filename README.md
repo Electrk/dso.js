@@ -1,5 +1,8 @@
 # dso.js
-A DSO decompiler for Blockland.
+
+A DSO decompiler for the Torque Game Engine.
+
+It currently only supports games made in TGE, so TGEA, Torque3D, etc. are not supported.
 
 
 ## Installation
@@ -14,7 +17,9 @@ For client-side, use with the [`buffer`](https://npmjs.com/package/buffer) packa
 For server-side, you can just use the native `Buffer` class.
 
 
-#### Browser Example:
+### Basic Examples
+
+#### Browser:
 
 ```js
 import { Buffer }     from 'buffer/';
@@ -57,7 +62,7 @@ document.getElementById ('fileUpload').onchange = function ( event )
 ```
 
 
-#### Node.js Example:
+#### Node.js:
 
 ```js
 const fs = require ('fs');
@@ -89,15 +94,32 @@ fs.readFile ('./myFile.cs.dso', ( error, buffer ) =>
 });
 ```
 
+### Plugins
 
-#### Decompiler Options
+This decompiler supports plugins for different games/versions.  You can mix and match different opcode sets, loaders, parsers, etc.
 
-The optional second argument of `decompileDSO` is an options object.
 
-The only one at the moment is the `outputArray` boolean, which is `false` by default.  When set to `true`, it makes `decompileDSO` output a nested code array instead of a string.
-
-Enable the option like this:
+#### Example:
 
 ```js
-decompiler.decompileDSO (buffer, { outputArray: true });
+import { decompiler } from 'dso.js';
+
+import blocklandDSO from 'blockland-dso.js';
+
+
+// Add the plugin to the decompiler.
+decompiler.plugins.add (blocklandDSO);
+
+// ...
+
+// Decompilation with plugins.
+decompiler.decompileDSO (buffer,
+{
+	plugins:
+	{
+		opcodeSet: 'blockland-v21',
+		loader:    'blockland-common',
+	},
+});
+
 ```
