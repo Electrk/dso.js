@@ -60,7 +60,7 @@ class DSOParser
 
 	parseUntil ( untilType, block = this.controlBlock, skipType = true )
 	{
-		const parser = new DSOParser (this.tokens, block);
+		const parser = this.factory.create.parser (this.key, this.tokens, block);
 		const nodes  = parser.parse (this.currPos, untilType);
 
 		// +1 if we want to skip past the `untilType` token.

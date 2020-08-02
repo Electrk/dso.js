@@ -43,7 +43,7 @@ class DSOControlBlock
 
 		if ( this.type === 'root' )
 		{
-			block = new DSOControlBlock (start, end, parent);
+			block = this.factory.create.controlBlock (this.key, start, end, parent);
 
 			this.blocks.set (start, block);
 		}
