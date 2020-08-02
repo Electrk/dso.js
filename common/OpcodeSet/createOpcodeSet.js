@@ -1,7 +1,7 @@
-import DSOOpcodeSet from '~/DSOOpcodeSet/DSOOpcodeSet.js';
+import OpcodeSet from '~/OpcodeSet/OpcodeSet.js';
 
-import * as blv20 from '~/DSOOpcodeSet/opcodes/blockland-v20.js';
-import * as blv21 from '~/DSOOpcodeSet/opcodes/blockland-v21.js';
+import * as blv20 from '~/OpcodeSet/opcodes/blockland-v20.js';
+import * as blv21 from '~/OpcodeSet/opcodes/blockland-v21.js';
 
 
 /**
@@ -9,7 +9,7 @@ import * as blv21 from '~/DSOOpcodeSet/opcodes/blockland-v21.js';
  * @param   {string[]}      [nameOrObject.opcodes] - List of opcode names.
  * @param   {integer}       [nameOrObject.version] - DSO version to require.
  *
- * @returns {DSOOpcodeSet}
+ * @returns {OpcodeSet}
  */
 const createOpcodeSet = nameOrObject =>
 {
@@ -48,7 +48,7 @@ const createOpcodeSet = nameOrObject =>
 		}
 	}
 
-	return new DSOOpcodeSet (opcodes, version);
+	return new OpcodeSet (opcodes, version);
 };
 
 

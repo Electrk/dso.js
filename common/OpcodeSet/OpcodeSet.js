@@ -4,7 +4,7 @@ import { has }       from '~/util/has.js';
 import { getOpType } from '~/common/ops/getOpType.js';
 
 
-class DSOOpcodeSet
+class OpcodeSet
 {
 	/**
 	 * @param {string[]} opnames - A list of opcode names.
@@ -100,4 +100,4 @@ class DSOOpcodeSet
 }
 
 
-export default DSOOpcodeSet;
+export default OpcodeSet;
