@@ -39,7 +39,7 @@ module.exports =
 
 	optimization:
 	{
-    	minimize: true,
+		minimize: true,
 		minimizer:
 		[
 			new TerserPlugin (
@@ -57,10 +57,11 @@ module.exports =
 	{
 		alias:
 		{
-			'~/common':       path.resolve (__dirname, './common/'),
-			'~/util':         path.resolve (__dirname, './common/util/'),
-			'~/ArrayMap.js':  path.resolve (__dirname, './common/ArrayMap.js'),
-			'~/DSOOpcodeSet': path.resolve (__dirname, './common/DSOOpcodeSet/'),
+			'~/common':        path.resolve (__dirname, './common/'),
+			'~/util':          path.resolve (__dirname, './common/util/'),
+			'~/ArrayMap.js':   path.resolve (__dirname, './common/ArrayMap.js'),
+			'~/ObjectFactory': path.resolve (__dirname, './common/ObjectFactory/'),
+			'~/ObjectStore':   path.resolve (__dirname, './common/ObjectStore/'),
 
 			'~/decompiler':       path.resolve (__dirname, './decompiler/'),
 			'~/DSOLoader':        path.resolve (__dirname, './decompiler/DSOLoader/'),

@@ -1,64 +1,36 @@
+import ObjectStore from '~/ObjectStore/ObjectStore.js';
+
 import assert from '~/util/assert.js';
+
+import { has } from '~/util/has.js';
 
 
 class ObjectFactory
 {
-	/**
-	 * @param {Function} classFunc
-	 */
-	constructor ( classFunc )
+	constructor ()
 	{
-		this.classFunc = classFunc;
-		this.configMap = new Map ();
+		this.config = {};
+		this.create = {};
 	}
 
 	/**
-	 * @param {string} key
-	 * @param {Object} config
+	 * @param {string}   objectType
+	 * @param {Function} factoryFunc
 	 */
-	add ( key, config )
+	register ( objectType, factoryFunc )
 	{
-		assert (!this.has (key), `${this.classFunc.name} config with key \`${key}\` already exists`);
+		assert (!has (this.create, objectType), `Factory \`${objectType}\` already registered`);
 
-		this.configMap.set (key, config);
-	}
+		const factory = this;
 
-	/**
-	 * @param   {string} key
-	 * @returns {Object|null} null if invalid key
-	 */
-	get ( key )
-	{
-		return this.has (key) ? this.configMap.get (key) : null;
-	}
+		this.create[objectType] = function ( key, ...args )
+		{
+			const config = factory.config[objectType].get (key);
 
-	/**
-	 * @param   {string} key
-	 * @returns {boolean}
-	 */
-	has ( key )
-	{
-		return this.configMap.has (key);
-	}
+			return Object.assign (factoryFunc (...args), { key, factory, ...config });
+		};
 
-	/**
-	 * @param {string} key
-	 * @param {...*}   args
-	 *
-	 * @returns {Object}
-	 */
-	create ( key, ...args )
-	{
-		const config = this.get (key);
-
-		assert (config !== null, `${this.classFunc.name} config with key \`${key}\` not found`);
-
-		const instance = Object.assign (new this.classFunc (...args), config);
-
-		instance.key     = key;
-		instance.factory = this;
-
-		return instance;
+		this.config[objectType] = new ObjectStore ();
 	}
 }
 
