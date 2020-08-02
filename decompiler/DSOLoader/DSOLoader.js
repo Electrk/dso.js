@@ -16,10 +16,9 @@ class DSOLoader
 {
 	/**
 	 * @param {Buffer}       buffer    - File buffer for open DSO file.
-	 * @param {DSOOpcodeSet} opcodeSet - Opcode set we're using.
-	 * @param {Function}     readFunc  - Game-specific function for reading DSOs.
+	 * @param {OpcodeSet} opcodeSet - Game-specific opcodes.
 	 */
-	constructor ( buffer = null, opcodeSet = null, readFunc = null )
+	constructor ( buffer = null, opcodeSet = null )
 	{
 		if ( buffer === null )
 		{
@@ -31,24 +30,16 @@ class DSOLoader
 			throw new DSOLoaderError ('Missing required argument: `opcodeSet`');
 		}
 
-		if ( readFunc === null )
-		{
-			throw new DSOLoaderError ('Missing required argument: `readFunc`');
-		}
-
 		this.buffer    = buffer;
 		this.opcodeSet = opcodeSet;
-		this.readFunc  = readFunc;
-
-		this.currPos = 0;
+		this.currPos   = 0;
 
 		this.code = [];
 
 		this.globalStringTable   = null;
 		this.functionStringTable = null;
-
-		this.globalFloatTable   = null;
-		this.functionFloatTable = null;
+		this.globalFloatTable    = null;
+		this.functionFloatTable  = null;
 
 		this.lineBreakPairs = [];
 		this.identTable     = {};
@@ -56,7 +47,15 @@ class DSOLoader
 
 	read ()
 	{
-		this.readFunc ();
+		this.readVersion ();
+		this.readTables ();
+
+		const codeSize      = this.readInteger (true);
+		const numLineBreaks = this.readInteger (true);
+
+		this.readCode (codeSize);
+		this.readLineBreaks (codeSize, numLineBreaks);
+		this.readIdentTable (this.readInteger (true));
 	}
 
 	readVersion ()
@@ -69,6 +68,14 @@ class DSOLoader
 		{
 			throw new DSOLoaderError (`Invalid DSO version: Expected ${version}, got ${fileVersion}`);
 		}
+	}
+
+	readTables ()
+	{
+		this.globalStringTable   = this.buildStringTable (this.readStringTable ());
+		this.functionStringTable = this.buildStringTable (this.readStringTable ());
+		this.globalFloatTable    = this.buildFloatTable (this.readFloatTable ());
+		this.functionFloatTable  = this.buildFloatTable (this.readFloatTable ());
 	}
 
 	readCode ( codeSize )

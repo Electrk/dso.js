@@ -116,10 +116,15 @@ const readFloatTable = function ()
 
 	for ( let i = 0; i < size; i++ )
 	{
-		table.push (this.readFloat ());
+		table.push (this.readFloat (true));
 	}
 
 	return table;
+};
+
+const buildFloatTable = function ( floats )
+{
+	return floats;
 };
 
 const readCodeByte = function ()
@@ -135,4 +140,4 @@ const readCodeByte = function ()
 };
 
 
-export { readNumber, readInteger, readFloat, readFloatTable, readCodeByte };
+export { readNumber, readInteger, readFloat, readFloatTable, buildFloatTable, readCodeByte };
