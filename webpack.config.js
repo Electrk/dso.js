@@ -62,6 +62,7 @@ module.exports =
 			'~/ArrayMap.js':   path.resolve (__dirname, './common/ArrayMap.js'),
 			'~/ObjectFactory': path.resolve (__dirname, './common/ObjectFactory/'),
 			'~/ObjectStore':   path.resolve (__dirname, './common/ObjectStore/'),
+			'~/OpcodeSet':     path.resolve (__dirname, './common/OpcodeSet/'),
 
 			'~/decompiler':       path.resolve (__dirname, './decompiler/'),
 			'~/DSOLoader':        path.resolve (__dirname, './decompiler/DSOLoader/'),
