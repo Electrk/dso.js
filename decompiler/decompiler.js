@@ -3,10 +3,12 @@ import DSOPlugins from '~/decompiler/DSOPlugins.js';
 
 import { DSODecompilerError } from '~/decompiler/errors.js';
 
+import { has } from '~/util/has.js';
+
 
 const decompileDSO = ( buffer, config = {} ) =>
 {
-	const { outputArray = false } = config;
+	const { outputArray = false, plugins = {} } = config;
 
 	const keys =
 	{
@@ -18,9 +20,9 @@ const decompileDSO = ( buffer, config = {} ) =>
 		codeGenerator: 'default',
 	};
 
-	for ( let type in config )
+	for ( let type in plugins )
 	{
-		keys[type] = config[type];
+		keys[type] = plugins[type];
 	}
 
 	const { create } = DSOFactory;
@@ -56,5 +58,6 @@ export
 {
 	decompileDSO,
 
+	DSOFactory as factory,
 	DSOPlugins as plugins,
 };

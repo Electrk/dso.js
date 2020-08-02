@@ -3,6 +3,9 @@ import DSOFactory from '~/decompiler/DSOFactory.js';
 
 const DSOPlugins =
 {
+	/**
+	 * @param {Object} plugins
+	 */
 	add ( plugins )
 	{
 		for ( let key in plugins )
